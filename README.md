@@ -1,7 +1,11 @@
 Perlin Noise
 ============
 
-Experiments and investigations in understanding Perlin noise.
+Experiments and investigations in understanding Perlin noise. Written in Python 3.3.
+
+$ python3 noise.py
+
+![screenshot](doc/images/screenshot_1.png)
 
 Currently
 ---------
