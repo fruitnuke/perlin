@@ -5,7 +5,7 @@ Experiments and investigations in understanding Perlin noise. Written in Python 
 
 $ python3 noise.py
 
-![screenshot](doc/images/screenshot_1.png)
+![screenshot](doc/images/screenshot.png)
 
 Currently
 ---------
