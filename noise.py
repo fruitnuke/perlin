@@ -56,14 +56,22 @@ def random_n(n):
     return _random[n + _random_offset]
 
 
+def s_curve(x):
+    return x * x * (3.0 - 2.0 * x)
+
+
 def noise(x):
     """A first approximation of perlin noise; do a linear interpolation between pseudo-random numbers at given intervals.
 
     x is a 1d coordinate in local space, returns a float that represents the noise value at that point.
     """
-    a  = math.floor(x)
-    dx = x - a
-    return cubic_interpolate(random_n(a-1), random_n(a), random_n(a+1), random_n(a+2), dx)
+    a = math.floor(x)
+    b = a + 1
+    r = x - a
+    u = r * random_n(a)
+    v = (r - 1.0) * random_n(b)
+    sx = s_curve(r)
+    return linear_interpolate(u, v, sx)
 
 
 if __name__ == '__main__':
@@ -101,8 +109,8 @@ if __name__ == '__main__':
     scale = 10
     def slope(x, y, gradient):
         """draw a line representing the gradient at x, y in the local coord system."""
-        xx = (x * xstep)
-        yy = ymid + (y * ystep - 1)
+        xx = offset + (x * xstep)
+        yy = ymid + (y * ystep)
         dx = scale
         dy = gradient * scale
         canvas.create_line(xx-dx, yy-dy, xx+dx, yy+dy, fill='red')
@@ -111,14 +119,15 @@ if __name__ == '__main__':
 
     # highlight the known pseudo-random points
     for n in range(xmin, xmax + 1):
-        point(n, noise(n))
+        slope(n, 0, random_n(n))
 
-    # draw the noise octave, interpolating between the known random points.
+    # draw the noise octave, interpolating between the known random gradients.
     points = []
     for x in range(0, swidth + 1):
-        lx = x / 40
+
+        lx = x / (swidth / xmax)
         sx = offset + x
-        sy = ymid - round(noise(lx), 7) * ymid
+        sy = ymid + (noise(lx) * ymid)
         points.append((sx, sy))
     for i in range(len(points) - 1):
         x1, y1 = points[i]
