@@ -10,5 +10,9 @@ $ python3 noise.py
 Currently
 ---------
 
-Following [Hugo Elias's guide](http://freespace.virgin.net/hugo.elias/models/m_perlin.htm), the first step is to
-generate a one-dimensional perlin noise function (or an approximation thereof).
+Following Ken Perlin's [algorithm](http://www.noisemachine.com/talk1/15.html)
+and c [implementation](http://www.mrl.nyu.edu/~perlin/doc/oscar.html#noise), as
+well as the
+[Perlin noise math FAQ](http://webstaff.itn.liu.se/~stegu/TNM022-2005/perlinnoiselinks/perlin-noise-math-faq.html)
+by Matt Zucker, the first step is to generate a one-dimensional perlin noise
+function (or an approximation thereof).
